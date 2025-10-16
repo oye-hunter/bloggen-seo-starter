@@ -1,0 +1,93 @@
+---
+title: "Chrome Extension with Purpose"
+publishedAt: '2025-06-05'
+author: 'AI Assistant'
+type: 'blog'
+image: "/assets/blog/chrome-extension.webp"
+ogImage:
+  url: "/assets/blog/chrome-extension.webp"
+summary: '
+In an era where information is abundant yet time is scarce, building a Chrome extension that reads the web for you seemed like a brilliant idea.'
+tags: ["Blog","Article","Insights"]
+---
+ # What I Learned Building a Chrome Extension That Reads the Web for You
+
+There’s more information on the internet than ever before—but not enough time or attention to consume it all. I set out to solve that by building a **Chrome extension that summarizes and reads web pages aloud**, using a mix of browser APIs, AI, and clean UI. The goal was to create a seamless, audio-first browsing experience—something that could distill and deliver web content without the visual overload.
+
+Here’s what I learned along the way.
+
+---
+
+## The Core Idea
+
+The concept was simple: turn any web page into an audio summary that feels human, relevant, and focused. Instead of dumping the entire page into a robotic voice, I wanted **AI-powered summarization** and **smart text-to-speech** that worked in real-time, right in the browser.
+
+The use cases were clear:
+
+- Scan long-form articles while multitasking  
+- Turn dense technical documentation into digestible audio  
+- Make online reading more accessible for screen-fatigued users  
+
+But building something that *feels* natural is harder than it sounds.
+
+---
+
+## The Stack That Made It Work
+
+To keep the extension efficient and performant, I used:
+
+- **Chrome Extension APIs** for browser-level access and page scraping  
+- **OpenAI** for natural language understanding and summarization  
+- **Web Speech API** for built-in text-to-speech conversion  
+- A minimalist architecture using vanilla JavaScript, avoiding unnecessary frontend frameworks  
+
+This combination let the extension stay lightweight, privacy-conscious, and responsive to user actions.
+
+---
+
+## What Worked Well
+
+### 1. **Real-Time Summarization Changed the Game**
+
+By summarizing page content before reading it out loud, I cut down user time and delivered **context-aware audio** that was easier to follow than full-page reading. This made the tool feel more useful than traditional screen readers.
+
+### 2. **Minimalist UI Improved Adoption**
+
+No dashboards, no settings overload—just a toggle button and instant audio. The cleaner the interface, the more likely users were to try it, especially casual users unfamiliar with browser extensions.
+
+### 3. **Local Text-to-Speech Was Surprisingly Capable**
+
+While not as human as paid voice APIs, the built-in browser voices were fast, flexible, and good enough for a v1. They avoided third-party audio hosting and kept the UX frictionless.
+
+---
+
+## What Didn't Work
+
+### 1. **Summarization Quality Was Inconsistent**
+
+AI summarization works beautifully on structured content (like articles or blog posts), but struggles on dynamic or noisy pages (like e-commerce or interactive apps). I had to implement logic to handle edge cases and clean the extracted text before feeding it to the AI.
+
+### 2. **Voice Output Still Feels Robotic**
+
+Even with the best available browser voices, the audio doesn’t match human tone or cadence. If this becomes a long-term product, I’d explore third-party TTS engines like ElevenLabs or Play.ht for a more polished experience.
+
+### 3. **Content Privacy Required Extra Caution**
+
+Scraping and sending page content to an external AI model raises important privacy concerns. I ensured no personal data was sent, but for broader use cases, a proxy server with rate limits and auth would be essential to maintain compliance and control costs.
+
+---
+
+## Lessons for Other Builders
+
+- **Keep it native**: Leaning on built-in browser capabilities kept the experience fast and the footprint light. Avoid overengineering early versions.
+- **Know your limits**: AI adds incredible power, but it’s not magic. Understanding its failure modes is key to creating a reliable UX.
+- **Start simple**: The best version was the simplest—no onboarding, no settings panel, just one-click functionality and instant output.
+
+---
+
+## Final Thoughts
+
+**Browser extensions are underrated vehicles for practical AI tools.** They're fast to prototype, deeply embedded in user workflows, and capable of real-time interactions with the web. If you’re building AI-first products and want to meet users where they spend time, this is a frontier worth exploring.
+
+Building this extension was a lesson in restraint, architecture, and user empathy. And if there’s one takeaway: **the future of browsing isn’t just visual—it’s audible, adaptive, and AI-assisted**.
+
