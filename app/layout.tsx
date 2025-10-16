@@ -4,14 +4,14 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
-// import BackgroundGrid from "@/components/layout/BackgroundGrid";
+import BackgroundGrid from "@/components/layout/BackgroundGrid";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { baseUrl } from "./sitemap";
 import { Manrope } from "next/font/google";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
@@ -65,7 +65,7 @@ export default function RootLayout({
         <main className="flex-auto min-w-0 flex flex-col md:px-0">
           <Header />
           {children}
-          {/* <BackgroundGrid /> */}
+          <BackgroundGrid />
           <Footer />
           {/* <Analytics /> */}
 

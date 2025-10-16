@@ -10,7 +10,7 @@ import {
   Code,
   Heart,
 } from "lucide-react";
-import BackgroundGrid from "@/components/layout/BackgroundGrid";
+// import BackgroundGrid from "@/components/layout/BackgroundGrid";
 import { Metadata } from "next";
 import { createPageMetadata } from "@/lib/seo/metadata/create-page-metadata";
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
 
   return (
     <section className="relative w-full min-h-screen bg-black">
-      <BackgroundGrid />
+      {/* <BackgroundGrid /> */}
 
       <script
         type="application/ld+json"

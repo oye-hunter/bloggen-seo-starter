@@ -130,6 +130,7 @@
 
 'use client'
 import Logo from "@/components/Logo"
+import Link from "next/link"
 import { useState, useEffect } from "react"
 
 const Header = () => {
@@ -206,7 +207,7 @@ const Header = () => {
         
         {/* Logo + Hamburger */}
         <div className="logo flex lg:w-fit w-full lg:h-fit h-16 justify-between items-center relative">
-          <a
+          <Link
             href="/"
             className="text-white text-lg font-bold  leading-7 tracking-tight relative group"
             // onMouseEnter={() => setHoveredLink('logo')}
@@ -222,7 +223,7 @@ const Header = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent blur-sm" />
             </div>
-          </a>
+          </Link>
 
           <button
             className="hamburger-icon lg:hidden flex text-white relative"
@@ -277,9 +278,10 @@ const Header = () => {
         `}>
           <div className="links-wrap flex items-center justify-center lg:gap-[32px] gap-[20px] lg:flex-row flex-col ">
             {links.map((link, index) => (
-              <a
+              <Link
                 key={index}
                 href={link.href}
+                prefetch={true}
                 onClick={ToggleHeader}
                 // onMouseEnter={() => setHoveredLink(link.label)}
                 onMouseLeave={() => setHoveredLink(null)}
@@ -304,7 +306,7 @@ const Header = () => {
                 </div>
                 {/* Vertical thread on hover */}
                 <div className="absolute bottom-0 left-1/2 w-[1px] h-0 bg-gradient-to-b from-white/30 to-transparent group-hover:h-[20px] transition-all duration-300" />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
