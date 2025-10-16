@@ -6,6 +6,7 @@ import { formatDate } from '@/lib/utils/mdx';
 
 import { ArrowRight } from 'lucide-react';
 import { FaArrowRight } from 'react-icons/fa';
+import BackgroundGrid from '../layout/BackgroundGrid';
 
 interface BlogPostsProps {
     isHomePage?: boolean;
@@ -25,10 +26,11 @@ export function BlogPosts({ isHomePage = false }: BlogPostsProps) {
 
     return (
         <div className='min-h-screen px-4 sm:px-6 md:px-8 lg:px-0'>
-            <div className='fixed inset-0 z-[-1]'>
+            {/* <div className='fixed inset-0 z-[-1]'>
                 <div className='absolute inset-0' />
-            </div>
+            </div> */}
 
+            <BackgroundGrid />
             <div className='relative z-10'>
                 <div className='mx-auto py-10 sm:py-16'>
                     {/* Section Header */}

@@ -4,7 +4,7 @@ import WhyChooseUs from "@/components/ui/why-choose-us/page";
 import Products from "@/components/ui/our-products/page";
 import Hero from "@/components/ui/hero/page";
 import Footer from "@/components/layout/footer/Footer";
-// import BackgroundGrid from "@/components/layout/BackgroundGrid";
+import BackgroundGrid from "@/components/layout/BackgroundGrid";
 import { baseUrl } from "app/sitemap";
 // import { BlogPosts } from "@/components/posts";
 // import { createPageMetadata } from "@/lib/seo/metadata/createPageMetadata";
@@ -63,7 +63,7 @@ export default function Page() {
           }),
         }}
       />
-      {/* <BackgroundGrid /> */}
+      <BackgroundGrid />
       <Header />
       <Hero />
       <div className="flex max-w-full  w-full  flex-col items-center justify-center">

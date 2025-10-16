@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { formatDate, getBlogPosts } from "app/blog/utils";
+import { getBlogPosts } from '@/lib/blog';
+import { formatDate } from '@/lib/utils/mdx';
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
