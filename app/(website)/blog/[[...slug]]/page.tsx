@@ -11,6 +11,7 @@ import { blogSource, source } from '@/lib/source';
 import { getMDXComponents } from '@/mdx-components';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { DocsBody, DocsPage } from 'fumadocs-ui/page';
+import BackgroundGrid from '@/components/layout/BackgroundGrid';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
     const params = await props.params;
@@ -18,7 +19,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
     // // If this is the root /blog path (empty slug)
     if (!params.slug || params.slug.length === 0) {
         return (
-            <main role='main' className='min-h-screen '>
+            <main role='main' className='min-h-screen relative'>
                 <BlogSchema />
                 <BlogPosts />
             </main>
@@ -36,7 +37,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
     //     : `${siteConfig.baseUrl}/og?title=${encodeURIComponent(page.data.title)}`;
 
     return (
-        <main role='main' className='relative min-h-screen'>
+        <main role='main' className='min-h-screen relative'>
             <BlogPostSchema
                 title={page.data.title}
                 description={page.data.description}

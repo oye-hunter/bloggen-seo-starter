@@ -32,62 +32,47 @@ export function BlogPosts({ isHomePage = false }: BlogPostsProps) {
             <div className='relative z-10'>
                 <div className='mx-auto py-10 sm:py-16'>
                     {/* Section Header */}
-                    <div className='mb-16'>
-                        <span className='text-primary-text mb-4 block text-sm leading-relaxed font-normal tracking-wider uppercase md:text-lg'>
-                            Browse Template Blog Posts
-                        </span>
-                        <div className='flex flex-row items-center gap-2'>
-                            <h1 className='text-4xl leading-tight font-bold tracking-tight md:text-6xl'>
-                                <span className='text-canvas-text-contrast'>Latest</span>
-                                <span className='from-primary-solid via-primary-text to-primary-text-contrast bg-gradient-to-r bg-clip-text text-transparent'>
-                                    {' '}
-                                    Articles
-                                </span>
-                            </h1>
-                        </div>
-                    </div>
+        <div className="mb-16 mt-4">
+          <div className="flex items-center space-x-2 mb-4">
+            <div className="h-px w-12 bg-white/50" />
+            <span className="text-white/70 text-sm uppercase tracking-wider">
+              Our Blogs
+            </span>
+          </div>
+          <h2 className="text-4xl font-bold text-white">Latest Insights</h2>
+        </div>
 
                     {/* Blog Grid */}
-                    <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                    <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
                         {displayedBlogs.map((post, index) => (
-                            <Link key={post.slug} href={`/blog/${post.slug}`} className='group block'>
-                                <article className='bg-canvas-bg border-canvas-active hover:border-canvas-line rounded-lg border p-6 backdrop-blur-sm transition-all duration-300'>
-                                    <div className='relative mb-6 aspect-video overflow-hidden rounded-sm'>
+                            <Link key={post.slug} href={`/blog/${post.slug}`} className='group relative'>
+                                <div className='relative overflow-hidden border border-transparent backdrop-blur-sm transition-all duration-300 group-hover:border-white/20'>
+                                    <div className='relative aspect-[16/9]'>
                                         <Image
                                             src={post.metadata.image || ''}
                                             alt={post.metadata.title}
-                                            fill
-                                            className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
-                                            loading={index < 3 ? 'eager' : 'lazy'}
-                                            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                                            quality={index === 0 ? 85 : index < 3 ? 75 : 60}
-                                            placeholder='blur'
-                                            blurDataURL='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNlMmU4ZjAiLz48L3N2Zz4='
-                                            priority={index < 3}
-                                            fetchPriority={index === 0 ? 'high' : index < 3 ? 'high' : 'low'}
+                                            className='h-full w-full object-cover transition-transform duration-500'
+                                            width={400}
+                                            height={225}
                                         />
+                                        <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent' />
                                     </div>
-
-                                    <div className='mb-4 flex items-center gap-4'>
-                                        <div className='from-canvas-bg via-primary-bg-subtle to-primary-bg hover:via-primary-bg hover:to-primary-bg-hover rounded-sm bg-gradient-to-br p-2'>
-                                            <FaArrowRight className='text-primary-text h-4 w-4' />
+                                    <div className='p-6'>
+                                        <div className='mb-3 flex items-center space-x-2'>
+                                            <div className='h-px w-8 bg-white/30 transition-colors group-hover:bg-white/50' />
+                                            <time className='text-sm text-white/50'>
+                                                {formatDate(post.metadata.publishedAt)}
+                                            </time>
                                         </div>
-                                        <time className='text-canvas-text text-sm'>
-                                            {formatDate(post.metadata.publishedAt)}
-                                        </time>
+                                        <h3 className='text-xl font-bold text-white transition-colors group-hover:text-white/90'>
+                                            {post.metadata.title}
+                                        </h3>
+                                        <div className='mt-4 flex items-center space-x-2 text-white/50 transition-colors group-hover:text-white/70'>
+                                            <span className='text-sm'>Read More</span>
+                                            <ArrowRight className='h-4 w-4' />
+                                        </div>
                                     </div>
-
-                                    <h2 className='text-canvas-text-contrast group-hover:text-primary-text mb-3 text-lg leading-relaxed font-semibold tracking-normal transition-colors duration-300 md:text-xl line-clamp-2'>
-                                        {post.metadata.title}
-                                    </h2>
-
-                                    <div className='text-canvas-text group-hover:text-primary-text flex items-center text-sm transition-colors'>
-                                        <span className='text-canvas-text border-canvas-line inline-flex max-w-fit rounded border border-none bg-transparent px-1 text-sm leading-normal font-normal tracking-normal whitespace-nowrap md:text-base'>
-                                            Read article
-                                        </span>
-                                        <FaArrowRight className='ml-2 h-3 w-3 transition-transform group-hover:translate-x-1' />
-                                    </div>
-                                </article>
+                                </div>
                             </Link>
                         ))}
                     </div>

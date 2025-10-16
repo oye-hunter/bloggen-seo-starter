@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { formatDate, getBlogPosts } from "app/blog/utils";
+import { getBlogPosts } from '@/lib/blog';
+import { formatDate } from '@/lib/utils/mdx';
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
@@ -51,7 +52,7 @@ export function BlogPosts({ isHomePage = false }) {
                   <div className="flex items-center space-x-2 mb-3">
                     <div className="h-px w-8 bg-white/30 group-hover:bg-white/50 transition-colors" />
                     <time className="text-sm text-white/50">
-                      {formatDate(post.metadata.publishedAt, false)}
+                      {formatDate(post.metadata.publishedAt)}
                     </time>
                   </div>
                   <h3 className="text-xl font-bold text-white group-hover:text-white/90 transition-colors">
