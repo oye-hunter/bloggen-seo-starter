@@ -13,8 +13,23 @@ interface Props {
 
 export default function BlogHeader({ title, publishedAt, image }: Props) {
     return (
-        <header className='relative mx-auto max-w-6xl px-8'>
+        <header className='relative'>
             {/* Header Section */}
+        <div className="mb-20">
+          <div className="flex items-center space-x-3 mb-6">
+            <div className="h-px w-16 bg-white/50" />
+            <span className="text-white/70 text-sm uppercase tracking-wider font-medium">
+              Blog Post
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+            {title}
+          </h1>
+          <time className="text-white/60 text-lg">
+                {publishedAt && <time className='text-canvas-text text-lg'>{formatDate(publishedAt)}</time>}
+          </time>
+        </div>
+            {/* Header Section
             <div className='mb-20'>
                 <div className='mb-8 flex items-center space-x-3'>
                     <Link
@@ -28,10 +43,10 @@ export default function BlogHeader({ title, publishedAt, image }: Props) {
                     {title}
                 </h1>
                 {publishedAt && <time className='text-canvas-text text-lg'>{formatDate(publishedAt)}</time>}
-            </div>
+            </div> */}
 
             {/* Featured Image */}
-            {image && (
+            {/* {image && (
                 <div className='border-canvas-border relative mb-10 aspect-[21/9] w-full overflow-hidden rounded-sm border shadow-2xl'>
                     <Image
                         src={image}
@@ -49,7 +64,19 @@ export default function BlogHeader({ title, publishedAt, image }: Props) {
                         fetchPriority='high'
                     />
                 </div>
-            )}
+            )} */}
+            {/* Featured Image */}
+        {image && (
+          <div className="relative w-full aspect-[21/9] mb-20 overflow-hidden rounded-xl shadow-2xl">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
         </header>
     );
 }
