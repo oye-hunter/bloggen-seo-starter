@@ -5,11 +5,11 @@ import type { TOCItemType } from 'fumadocs-core/server';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 
-interface BlogTOCMobileProps {
+interface ContentTOCMobileProps {
     toc: TOCItemType[];
 }
 
-export function BlogTOCMobile({ toc }: BlogTOCMobileProps) {
+export function ContentTOCMobile({ toc }: ContentTOCMobileProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     if (!toc || toc.length === 0) return null;

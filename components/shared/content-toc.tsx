@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import type { TOCItemType } from 'fumadocs-core/server';
 import { cn } from '@/lib/utils';
 
-interface BlogTOCProps {
+interface ContentTOCProps {
     toc: TOCItemType[];
 }
 
-export function BlogTOC({ toc }: BlogTOCProps) {
+export function ContentTOC({ toc }: ContentTOCProps) {
     const [activeId, setActiveId] = useState<string>('');
 
     useEffect(() => {
@@ -52,7 +52,7 @@ export function BlogTOC({ toc }: BlogTOCProps) {
     };
 
     return (
-        <div className="sticky top-24 hidden xl:block">
+        <div className="hidden xl:block">
             <div className="relative">
                 {/* Decorative gradient background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent rounded-2xl blur-xl" />
@@ -101,58 +101,27 @@ export function BlogTOC({ toc }: BlogTOCProps) {
                                             )}
                                         />
 
-                                        {/* Depth indicator dots */}
-                                        {/* {depth > 0 && (
-                                            <div className="flex items-center gap-1">
-                                                {Array.from({ length: depth }).map((_, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className={cn(
-                                                            'w-1 h-1 rounded-full transition-all duration-300',
-                                                            isActive
-                                                                ? 'bg-white/80'
-                                                                : 'bg-white/30 group-hover:bg-white/50'
-                                                        )}
-                                                    />
-                                                 ))} 
-                                            </div>
-                                        )} */}
-
                                         {/* Link text */}
                                         <span className="relative z-10 text-xs leading-relaxed truncate">
                                             {item.title}
                                         </span>
 
-                                        {/* Active glow effect */}
-                                        {/* {isActive && (
-                                            <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent rounded-lg" />
-                                        )} */}
                                     {/* Active indicator line */}
                                     {isActive && (
-                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-gradient-to-b from-white/80 via-white/50 to-transparent rounded-full" />
+                                        <div className="absolute left-0 top-5/11 -translate-y-1/2 w-0.5 h-6 bg-gradient-to-t from-white/80 via-white/50 to-transparent rounded-full" />
                                     )}
                                     </a>
-
-                                    {/* Connection line for nested items */}
-
-
-                                    {/* {depth > 0 && (
-                                        <div
-                                            className="absolute left-2 top-0 w-px h-full bg-gradient-to-b from-white/10 to-transparent"
-                                            style={{ left: `${(depth - 1) * 12 + 8}px` }}
-                                        />
-                                    )} */}
                                 </div>
                             );
                         })}
                     </nav>
 
                     {/* Footer decoration */}
-                    <div className="mt-6 pt-4 border-t border-white/5">
+                    {/* <div className="mt-6 pt-4 border-t border-white/5">
                         <div className="flex items-center justify-center gap-2">
                             <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Outer glow effect */}

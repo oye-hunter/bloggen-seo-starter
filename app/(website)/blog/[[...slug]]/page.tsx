@@ -5,8 +5,8 @@ import type { ComponentProps, FC } from 'react';
 
 import BlogHeader from '@/components/blog/blog-header';
 import { BlogPosts } from '@/components/blog/blog-post';
-import { BlogTOC } from '@/components/blog/blog-toc';
-import { BlogTOCMobile } from '@/components/blog/blog-toc-mobile';
+import { ContentTOC } from '@/components/shared/content-toc';
+import { ContentTOCMobile } from '@/components/shared/content-toc-mobile';
 import { siteConfig } from '@/lib/config/site';
 import { defaultMetadata } from '@/lib/seo/metadata/create-base-metadata';
 import { createPageMetadata } from '@/lib/seo/metadata/create-page-metadata';
@@ -119,13 +119,13 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 
                     {/* Table of Contents */}
                     <aside className='w-full xl:w-72 shrink-0'>
-                        <BlogTOC toc={page.data.toc} />
+                        <ContentTOC toc={page.data.toc} />
                     </aside>
                 </div>
             </div>
 
             {/* Mobile TOC */}
-            <BlogTOCMobile toc={page.data.toc} />
+            <ContentTOCMobile toc={page.data.toc} />
         </main>
     );
 }
