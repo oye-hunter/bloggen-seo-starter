@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { Input, Select, Textarea } from '@/components/ui/input';
 import { send } from '@emailjs/browser';
-import { Button } from '../ui/button';
+import { ArrowUpRight } from 'lucide-react';
 
 type FormData = {
     name: string;
@@ -140,25 +140,25 @@ export default function ContactForm() {
     return (
         <div>
             <div className='mb-8'>
-                <h3 className='text-canvas-text-contrast mb-2 text-2xl font-semibold'>Tell us about your project</h3>
-                <p className='text-canvas-text'>Fill out the form below and we'll get back to you within 24 hours.</p>
+                <h3 className='text-white mb-2 text-2xl font-semibold'>Tell us about your project</h3>
+                <p className='text-white/60'>Fill out the form below and we'll get back to you within 24 hours.</p>
             </div>
 
             {submitStatus === 'success' && (
-                <div className='bg-success-bg border-success-border mb-6 rounded-lg border p-4'>
-                    <p className='text-success-text font-medium'>
+                <div className='mb-6 rounded-lg border border-green-500/20 bg-green-500/10 p-4'>
+                    <p className='text-green-400 font-medium'>
                         Thank you! Your message has been sent successfully. We'll get back to you soon.
                     </p>
                 </div>
             )}
 
             {submitStatus === 'error' && (
-                <div className='bg-alert-bg border-alert-border mb-6 rounded-lg border p-4'>
-                    <p className='text-alert-text font-medium'>
+                <div className='mb-6 rounded-lg border border-red-500/20 bg-red-500/10 p-4'>
+                    <p className='text-red-400 font-medium'>
                         Something went wrong. Please try again or contact us directly.
                     </p>
                     <Link
-                        className='text-canvas-text-contrast font-bold underline'
+                        className='text-white font-bold underline hover:text-white/80 transition-colors'
                         href='mailto:silverthreadlabs@gmail.com'>
                         silverthreadlabs@gmail.com
                     </Link>
@@ -227,17 +227,19 @@ export default function ContactForm() {
                 />
 
                 <div className='pt-4'>
-                    <Button
+                    <button
                         type='submit'
-                        size='lg'
-                        fullWidth
-                        isLoading={isSubmitting}
-                        loadingText='Sending...'
                         disabled={isSubmitting}
+                        className="flex items-center justify-center space-x-2 bg-white hover:bg-white/90 text-black px-6 py-4 rounded-lg transition-all duration-300 w-full group disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label='Send Message'
-                        name='Send Message'>
-                        Send Message
-                    </Button>
+                    >
+                        <span className="font-medium">
+                            {isSubmitting ? 'Sending...' : 'Send Message'}
+                        </span>
+                        {!isSubmitting && (
+                            <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        )}
+                    </button>
                 </div>
             </form>
         </div>
