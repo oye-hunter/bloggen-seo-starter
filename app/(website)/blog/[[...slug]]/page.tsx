@@ -1,9 +1,12 @@
 import { notFound } from 'next/navigation';
 import path from 'path';
-import Image from 'next/image';
+import Link from 'next/link';
+import type { ComponentProps, FC } from 'react';
 
-import { BlogPosts } from '@/components/blog/blog-post';
 import BlogHeader from '@/components/blog/blog-header';
+import { BlogPosts } from '@/components/blog/blog-post';
+import { BlogTOC } from '@/components/blog/blog-toc';
+import { BlogTOCMobile } from '@/components/blog/blog-toc-mobile';
 import { siteConfig } from '@/lib/config/site';
 import { defaultMetadata } from '@/lib/seo/metadata/create-base-metadata';
 import { createPageMetadata } from '@/lib/seo/metadata/create-page-metadata';
@@ -20,28 +23,16 @@ import {
 import { Mermaid } from '@/components/ui/mermaid';
 import { Wrapper } from '@/components/ui/wrapper';
 import { UiOverview } from '@/components/ui-overview';
-import { onRateAction, owner, repo } from '@/lib/github';
+import { onRateAction } from '@/lib/github';
 import { formatDate } from '@/lib/utils/mdx';
-import {
-    PageArticle,
-    PageBreadcrumb,
-    PageFooter,
-    PageLastUpdate,
-    PageRoot,
-    PageTOC,
-    PageTOCItems,
-    PageTOCPopover,
-    PageTOCPopoverContent,
-    PageTOCPopoverItems,
-    PageTOCPopoverTrigger,
-    PageTOCTitle,
-} from 'fumadocs-ui/layouts/docs/page';
-import Link from 'next/link';
+import { Banner } from 'fumadocs-ui/components/banner';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
     const params = await props.params;
 
-    // If this is the root /blog path (empty slug)
+    // // If this is the root /blog path (empty slug)
     if (!params.slug || params.slug.length === 0) {
         return (
             <main role='main' className='min-h-screen relative'>
@@ -58,11 +49,8 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 
     return (
         <main role='main' className='min-h-screen relative'>
-            <div className='flex max-w-7xl flex-col py-16 md:py-28'>
-                {/* Blog Header */}
-                <BlogHeader title={page.data.title} publishedAt={page.data.publishedAt} image={page.data.image} />
-                <BlogPostSchema
-                    title={page.data.title}
+            <BlogPostSchema
+                title={page.data.title}
                 description={page.data.description}
                 summary={page.data.summary}
                 publishedAt={page.data.publishedAt}
@@ -71,63 +59,73 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
                 author={page.data.author}
                 tags={page.data.tags}
             />
-            <PageRoot
-                toc={{
-                    toc: page.data.toc,
-                    single: false,
-                }}
-            >
-                {page.data.toc.length > 0 && (
-                    <PageTOCPopover>
-                        <PageTOCPopoverTrigger />
-                        <PageTOCPopoverContent>
-                            <PageTOCPopoverItems />
-                        </PageTOCPopoverContent>
-                    </PageTOCPopover>
-                )}
-                <PageArticle>
-                    <PageBreadcrumb />
+            <div className='mx-auto max-w-7xl px-4 sm:px-0 py-16 md:py-28'>
+                <BlogHeader title={page.data.title} publishedAt={page.data.publishedAt} image={page.data.image} />
+                
+                <div className='flex flex-col xl:flex-row gap-12'>
+                    {/* Main Content */}
+                    <div className='flex-1 min-w-0'>
+                        <article className="prose prose-invert max-w-none">
+                            <MDXContent
+                                components={getMDXComponents({
+                                    a: ({ href, ...props }) => {
+                                        const found = blogSource.getPageByHref(href ?? '', {
+                                            dir: path.dirname(page.path),
+                                        });
 
-                    {/* Content */}
-                    <div className="prose flex-1 text-fd-foreground/80">
-                        <MDXContent
-                            components={getMDXComponents({
-                                a: ({ href, ...props }) => {
-                                    const found = blogSource.getPageByHref(href ?? '', {
-                                        dir: path.dirname(page.path),
-                                    });
+                                        if (!found) return <Link href={href ?? '#'} {...props} />;
 
-                                    if (!found) return <Link href={href ?? '#'} {...props} />;
+                                        return (
+                                            <HoverCard>
+                                                <HoverCardTrigger asChild>
+                                                    <Link
+                                                        href={
+                                                            found.hash
+                                                                ? `${found.page.url}#${found.hash}`
+                                                                : found.page.url
+                                                        }
+                                                        {...props}
+                                                    />
+                                                </HoverCardTrigger>
+                                                <HoverCardContent className="text-sm bg-black/90 border-white/20">
+                                                    <p className="font-medium text-white">{found.page.data.title}</p>
+                                                    <p className="text-white/70">
+                                                        {found.page.data.description}
+                                                    </p>
+                                                </HoverCardContent>
+                                            </HoverCard>
+                                        );
+                                    },
+                                    Banner,
+                                    Mermaid,
+                                    TypeTable,
+                                    Wrapper,
+                                    blockquote: Callout as unknown as FC<ComponentProps<'blockquote'>>,
+                                    UiOverview,
+                                })}
+                            />
+                        </article>
 
-                                    return (
-                                        <Link
-                                            href={
-                                                found.hash
-                                                    ? `${found.page.url}#${found.hash}`
-                                                    : found.page.url
-                                            }
-                                            {...props}
-                                        />
-                                    );
-                                },
-                            })}
-                        />
+                        {/* Rate Component */}
+                        <div className="mt-12 pt-8 border-t border-white/10">
+                            <Rate onRateAction={onRateAction} />
+                            {page.data.publishedAt && (
+                                <p className="text-sm text-white/60 mt-6">
+                                    Last updated: {formatDate(page.data.publishedAt)}
+                                </p>
+                            )}
+                        </div>
                     </div>
 
-                    {page.data.publishedAt && (
-                        <PageLastUpdate date={new Date(page.data.publishedAt)} />
-                    )}
-                    <PageFooter />
-                </PageArticle>
-                
-                {page.data.toc.length > 0 && (
-                    <PageTOC>
-                        <PageTOCTitle />
-                        <PageTOCItems variant="clerk" />
-                    </PageTOC>
-                )}
-            </PageRoot>
+                    {/* Table of Contents */}
+                    <aside className='w-full xl:w-72 shrink-0'>
+                        <BlogTOC toc={page.data.toc} />
+                    </aside>
+                </div>
             </div>
+
+            {/* Mobile TOC */}
+            <BlogTOCMobile toc={page.data.toc} />
         </main>
     );
 }

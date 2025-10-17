@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                         tree={blogSource.pageTree}
                         sidebar={{ enabled: false }}
                         searchToggle={{ enabled: false }}
-                        nav={{ enabled: true }}>
+                        nav={{ enabled: false }}>
                         {children}
                     </DocsLayout>
                 </div>
