@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 import { minimalCSS, modernCSS, subtleCSS } from '@/lib/utils/theme';
 
-import { Button } from '../../ui/button';
-import { ThemeToggle } from '../../ui/theme-toggle';
+import { Button } from '@/components/ui/button';
+// import { ThemeToggle } from '../../ui/theme-toggle';
 import { Heart } from 'lucide-react';
 
 interface PlayGroundCardProps {
@@ -160,7 +160,7 @@ const PlayGroundCard: React.FC<PlayGroundCardProps> = ({ className = '' }) => {
                             <p className='text-canvas-text mt-3 text-sm font-medium capitalize'>subtle</p>
                         </div>
                     </div>
-                    <ThemeToggle />
+                    {/* <ThemeToggle /> */}
                 </div>
 
                 {/* Product Card */}

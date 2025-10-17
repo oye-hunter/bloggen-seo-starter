@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import FeatureCard from '@/components/ui/feature-card';
+// import FeatureCard from '@/components/ui/feature-card';
 
 import features from './features-list';
 import { motion } from 'framer-motion';
@@ -114,7 +114,7 @@ export default function Hero() {
                         transition={{ duration: 0.2 }}
                         className='flex flex-1 items-center py-10 xl:py-20'>
                         <div className='grid w-full gap-6'>
-                            {features.map((feature, index) => (
+                            {/* {features.map((feature, index) => (
                                 <FeatureCard
                                     key={index}
                                     icon={feature.icon}
@@ -123,7 +123,7 @@ export default function Hero() {
                                     code={feature.code}
                                     descriptionEnd={feature.descriptionEnd}
                                 />
-                            ))}
+                            ))} */}
                         </div>
                     </motion.div>
                 </div>

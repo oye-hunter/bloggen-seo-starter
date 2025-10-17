@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { formatDate, getProductPosts } from "app/products/utils";
+import { getProductPosts } from '@/lib/products';
+import { formatDate } from '@/lib/utils/mdx';
 import Image from "next/image";
 import { ArrowUpRight, ArrowLeft } from 'lucide-react';
 import BackgroundGrid from "@/components/layout/BackgroundGrid";
